@@ -88,7 +88,7 @@ describe('renderBrief', () => {
       streak: 5, maxStreak: 5, exhaustedPairIds: [], isComplete: true, confidence: 0.85,
     };
     const brief = renderBrief(state, []);
-    expect(brief.headline).toBe('Brief from Sky');
+    expect(brief.headline).toBe('Pre-arrival brief — Rosewood Sand Hill');
     expect(brief.greeting).toMatch(/Quick read/);
     expect(brief.recommendations).toHaveLength(3);
     expect(brief.signoff).toMatch(/Sky/);

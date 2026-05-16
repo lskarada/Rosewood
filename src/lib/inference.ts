@@ -100,33 +100,34 @@ const AXIS_LABELS: Record<Axis, [string, string]> = {
 };
 
 // Cue tables: axis pole → one-liner the concierge team can act on.
-// Every axis (8) has entries on both poles so top[0] and top[1] always have cues.
+// Tuned for Rosewood Sand Hill (Menlo Park). Every axis has both poles wired
+// so top[0] and top[1] always produce a cue.
 const ROOM_CUES: Record<string, string> = {
-  'social+':       'Put them in the wing facing the buzz — pool side, energy floor.',
-  'social-':       'Top floor, far from the pool and elevators. Privacy first.',
-  'evening+':      'Bar-adjacent if you have it. Pre-clear late check-in and a bar tab.',
-  'evening-':      'Quiet wing. Heavy drapes. Confirm an early dinner reservation.',
-  'activity+':     'Trail map and a chilled water bottle waiting in the room.',
-  'activity-':     'Robe and slippers out. Spa booking pre-pencilled, no pressure.',
-  'dining+':       'Welcome amenity: a bottle of our chef’s signature wine.',
-  'dining-':       'Welcome amenity: a curated map of nearby spots, three names circled.',
-  'aesthetic+':    'Minimal welcome — single stem, clean surfaces. Skip the fruit basket.',
-  'aesthetic-':    'Layered welcome — local art on the wall, textured linens, books on the shelf.',
-  'format+':       'Concierge intro at check-in — they’ll engage. Mention the group offerings.',
-  'format-':       'Skip the welcome introduction. Email-only check-in note is fine.',
-  'environment+':  'Water-view room if it is available. The view is the welcome.',
-  'environment-':  'Tree-line view beats ocean view for this guest. Quiet side.',
-  'chronotype+':   'Late check-in pre-cleared. Do not ring the room before 11am.',
-  'chronotype-':   'Morning paper outside the door. Coffee station stocked by 6:30am.',
+  'social+':       'West Wing facing the pool — busiest section, energy nearby.',
+  'social-':       'East Wing top floor, oak-hillside view. Privacy first.',
+  'evening+':      'Wine Garden open until 11. Pre-clear late check-in.',
+  'evening-':      'Madera fireplace nook reserved for 7pm. Heavy drapes confirmed.',
+  'activity+':     'Sand Hill loop trail map + chilled water bottle. Hiking shoes at concierge.',
+  'activity-':     'Asaya booking pre-pencilled. Robe and slippers laid out.',
+  'dining+':       'Welcome amenity: bottle of our Madera-pairing red.',
+  'dining-':       'Welcome amenity: curated Menlo Park dining map, three names circled.',
+  'aesthetic+':    'Premier Vineyard room — clean palette, single orchid. Skip the fruit basket.',
+  'aesthetic-':    'Luxury Suite — layered linens, leather-bound books, deeper wood.',
+  'format+':       'Concierge intro at check-in. Mention the Wine Garden Sunday tasting.',
+  'format-':       'No welcome reception. Email-only intro, room set up quietly.',
+  'environment+':  'Oak-hillside-facing room with the private deck.',
+  'environment-':  'Inner courtyard cottage. Quieter, more contained.',
+  'chronotype+':   '24-hour Madera bar menu in the room. Do not ring before 11am.',
+  'chronotype-':   'Coffee station stocked by 6:30am. WSJ at the door.',
 };
 
 const LEAD_CUES: Record<string, string> = {
-  'dining+':       'If they ask for dinner, lead with the chef’s table tasting menu.',
-  'dining-':       'If they ask for dinner, three off-property names first. Skip the chef’s-table pitch.',
-  'format+':       'Float any group activity early — they’ll say yes.',
+  'dining+':       'If they ask for dinner, lead with Madera’s chef tasting.',
+  'dining-':       'If they ask for dinner: Vina Enoteca, The Sea, Selby’s. Skip the Madera pitch.',
+  'format+':       'Float the Wine Garden Sunday tasting — they’ll engage.',
   'format-':       'No mass-welcome events. Let them set the pace.',
-  'chronotype+':   '24-hour room service menu front and center. They’re a night-owl.',
-  'chronotype-':   'Coffee at 6am. Continental tray ready by 7.',
+  'chronotype+':   '24-hour Madera bar menu front and center.',
+  'chronotype-':   'Sand Hill loop trail map on the desk. Sunrise is 6:14am tomorrow.',
 };
 
 export function renderBrief(state: SurveyState, pool: VibePair[]): GuestBrief {
@@ -221,13 +222,13 @@ export function renderBrief(state: SurveyState, pool: VibePair[]): GuestBrief {
   return {
     token: state.token,
     modality: state.modality ?? 'visual',
-    headline: 'Brief from Sky',
+    headline: 'Pre-arrival brief — Rosewood Sand Hill',
     greeting,
     surprise,
     spine: spineEntries.map(s => ({ label: s.label, vs: s.vs, image: s.image })),
     recommendations: recs.slice(0, 3),
     confidencePhrase,
-    signoff: '— Sky · your AI concierge',
+    signoff: '— Sky · your AI concierge at Sand Hill',
     topAxes: top.map(axis => ({ axis, score: state.profile[axis], label: human(axis) })),
     confidence: state.confidence,
     answeredCount: state.answered.length,
