@@ -1,7 +1,25 @@
 'use client';
 import { useEffect, use } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { MobileFrame } from '@/components/MobileFrame';
+import { useFeed } from '@/lib/store';
+import { buildDeck } from '@/lib/feed-deck';
+import { loadPairs } from '@/lib/content';
+import type { Reaction } from '@/lib/types';
+
+// Demo persona seed — voice agent doesn't yet write to the store directly,
+// so when the user wraps up we seed a coherent set of events so the brief
+// has real signal to display. Picks a "quiet executive on the move" persona.
+const VOICE_PERSONA: Array<{ pairId: string; side: 'a' | 'b'; reaction: Reaction; dwellMs: number }> = [
+  { pairId: 'pool-vs-cabana',         side: 'b', reaction: 'like',     dwellMs: 3200 },
+  { pairId: 'pool-vs-cabana',         side: 'a', reaction: 'dislike',  dwellMs: 1100 },
+  { pairId: 'winegarden-vs-maderabar', side: 'b', reaction: 'like',    dwellMs: 4100 },
+  { pairId: 'trail-vs-spa',            side: 'b', reaction: 'like',    dwellMs: 2800 },
+  { pairId: 'minimal-vs-maximal',      side: 'a', reaction: 'lingered', dwellMs: 3600 },
+  { pairId: 'solo-vs-group',           side: 'a', reaction: 'like',    dwellMs: 2500 },
+  { pairId: 'city-vs-morning',         side: 'a', reaction: 'like',    dwellMs: 3300 },
+];
 
 export default function AudioFlow({
   params,
@@ -9,8 +27,15 @@ export default function AudioFlow({
   params: Promise<{ token: string }>;
 }) {
   const { token } = use(params);
+  const router = useRouter();
   const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID ?? '';
 
+  const startSession = useFeed(s => s.startSession);
+  const recordEvent = useFeed(s => s.recordEvent);
+  const complete = useFeed(s => s.complete);
+  const setWrapNote = useFeed(s => s.setWrapNote);
+
+  // Inject ElevenLabs widget script
   useEffect(() => {
     if (!document.querySelector('script[src*="elevenlabs"]')) {
       const s = document.createElement('script');
@@ -19,6 +44,26 @@ export default function AudioFlow({
       document.body.appendChild(s);
     }
   }, []);
+
+  // Initialize the session so the store has a deck to seed against
+  useEffect(() => {
+    const deck = buildDeck(token, loadPairs());
+    startSession(token, deck);
+  }, [token, startSession]);
+
+  const finishAndShowBrief = () => {
+    // Map persona to actual cardIds in the loaded pool
+    const pool = loadPairs();
+    for (const step of VOICE_PERSONA) {
+      const pair = pool.find(p => p.id === step.pairId);
+      if (!pair) continue;
+      const cardId = `${step.pairId}-${step.side}`;
+      recordEvent(cardId, step.reaction, step.dwellMs);
+    }
+    setWrapNote('Coming with my partner — celebrating closing the round. Quiet would be nice.');
+    complete();
+    router.push(`/brief/${token}`);
+  };
 
   return (
     <MobileFrame>
@@ -51,13 +96,17 @@ export default function AudioFlow({
           )}
         </div>
 
-        <div className="px-6 pb-8 flex flex-col items-center gap-3">
-          <Link
-            href={`/brief/${token}`}
-            className="text-xs uppercase tracking-widest text-stone-500 hover:text-stone-300 transition-colors"
+        <div className="px-6 pb-8 flex flex-col items-center gap-4">
+          <button
+            type="button"
+            onClick={finishAndShowBrief}
+            className="
+              w-full max-w-xs rounded-full bg-stone-100 text-stone-900 py-3.5 font-medium text-base
+              hover:bg-white transition-colors
+            "
           >
-            view brief →
-          </Link>
+            I&apos;m done — show my brief
+          </button>
           <Link
             href="/"
             className="text-xs text-stone-600 hover:text-stone-400 transition-colors"
