@@ -81,16 +81,57 @@ describe('topAxes', () => {
 });
 
 describe('renderBrief', () => {
-  it('produces a brief with non-empty oneLine and recommendations', () => {
+  it('produces a warm brief with greeting, recommendations, signoff', () => {
     const p = { ...emptyProfile(), social: -0.7, activity: 0.8 };
     const state: SurveyState = {
       token: 't', modality: 'visual', profile: p, answered: [],
       streak: 5, maxStreak: 5, exhaustedPairIds: [], isComplete: true, confidence: 0.85,
     };
-    const brief = renderBrief(state);
-    expect(brief.oneLine.length).toBeGreaterThan(10);
-    expect(brief.recommendations.length).toBeGreaterThan(0);
+    const brief = renderBrief(state, []);
+    expect(brief.headline).toBe('Brief from Sky');
+    expect(brief.greeting).toMatch(/Quick read/);
+    expect(brief.recommendations).toHaveLength(3);
+    expect(brief.signoff).toMatch(/Sky/);
     expect(brief.confidence).toBe(0.85);
+    // High confidence path => "Solid read" phrase
+    expect(brief.confidencePhrase).toMatch(/Solid read/);
+  });
+
+  it('quotes actual chosen-vs-rejected labels in the greeting (spine)', () => {
+    const pair: VibePair = {
+      id: 'pool-vs-cabana', axes: ['social'],
+      a: { label: 'busy pool', image: '', audioPrompt: '', weights: { social: 0.8 } },
+      b: { label: 'hidden cabana', image: '', audioPrompt: '', weights: { social: -0.8 } },
+    };
+    const state: SurveyState = {
+      token: 't', modality: 'visual',
+      profile: { ...emptyProfile(), social: -0.8 },
+      answered: [{ pairId: 'pool-vs-cabana', chose: 'b' }],
+      streak: 1, maxStreak: 1, exhaustedPairIds: ['pool-vs-cabana'],
+      isComplete: true, confidence: 0.5,
+    };
+    const brief = renderBrief(state, [pair]);
+    expect(brief.spine).toEqual([{ label: 'hidden cabana', vs: 'busy pool' }]);
+    expect(brief.greeting).toMatch(/hidden cabana/);
+  });
+
+  it('emits a surprise line when a prediction was wrong', () => {
+    const pair: VibePair = {
+      id: 'rooftop-vs-fireplace', axes: ['evening'],
+      a: { label: 'rooftop DJ', image: '', audioPrompt: '', weights: { evening: 0.8 } },
+      b: { label: 'fireplace', image: '', audioPrompt: '', weights: { evening: -0.8 } },
+    };
+    const state: SurveyState = {
+      token: 't', modality: 'visual',
+      profile: { ...emptyProfile(), evening: 0.5 },
+      answered: [{ pairId: 'rooftop-vs-fireplace', chose: 'b', predicted: 'a', correct: false }],
+      streak: 0, maxStreak: 1, exhaustedPairIds: ['rooftop-vs-fireplace'],
+      isComplete: true, confidence: 0.3,
+    };
+    const brief = renderBrief(state, [pair]);
+    expect(brief.surprise).toMatch(/Surprised me/);
+    expect(brief.surprise).toMatch(/fireplace/);
+    expect(brief.surprise).toMatch(/rooftop DJ/);
   });
 });
 

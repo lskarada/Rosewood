@@ -48,11 +48,16 @@ export interface BriefRecommendation {
 
 export interface GuestBrief {
   token: string;
-  topAxes: Array<{ axis: Axis; score: number; label: string }>;
-  oneLine: string;
-  recommendations: BriefRecommendation[];
-  confidence: number;
   modality: 'audio' | 'visual';
+  headline: string;
+  greeting: string;
+  surprise?: string;
+  spine: Array<{ label: string; vs: string }>;
+  recommendations: BriefRecommendation[];
+  confidencePhrase: string;
+  signoff: string;
+  topAxes: Array<{ axis: Axis; score: number; label: string }>;
+  confidence: number;
   answeredCount: number;
   maxStreak: number;
 }

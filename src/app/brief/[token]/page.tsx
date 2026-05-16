@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useSurvey } from '@/lib/store';
 import { BriefCard } from '@/components/BriefCard';
 import { renderBrief } from '@/lib/inference';
+import { loadPairs } from '@/lib/content';
 
 export default function Brief({
   params,
@@ -21,7 +22,7 @@ export default function Brief({
       </main>
     );
   }
-  const brief = renderBrief({ ...state, isComplete: true });
+  const brief = renderBrief({ ...state, isComplete: true }, loadPairs());
   return (
     <main className="min-h-screen bg-stone-50 p-4 md:p-8">
       <BriefCard brief={brief} />
