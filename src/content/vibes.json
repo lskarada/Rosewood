@@ -1,0 +1,52 @@
+{
+  "pairs": [
+    {
+      "id": "pool-vs-cabana",
+      "axes": ["social"],
+      "a": {
+        "label": "busy pool",
+        "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900",
+        "audioPrompt": "A crowded resort pool — music thumping, drinks flying.",
+        "weights": { "social": 0.8 }
+      },
+      "b": {
+        "label": "hidden cabana",
+        "image": "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=900",
+        "audioPrompt": "A hidden cabana behind palms — one chair, a book, water.",
+        "weights": { "social": -0.8 }
+      }
+    },
+    {
+      "id": "rooftop-vs-fireplace",
+      "axes": ["evening"],
+      "a": {
+        "label": "rooftop DJ",
+        "image": "https://images.unsplash.com/photo-1530229540764-5f6ab595a6b1?w=900",
+        "audioPrompt": "Rooftop at sunset — DJ, low light, drink in hand.",
+        "weights": { "evening": 0.8 }
+      },
+      "b": {
+        "label": "fireplace",
+        "image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=900",
+        "audioPrompt": "Fireplace at midnight, book on your lap, quiet.",
+        "weights": { "evening": -0.8 }
+      }
+    },
+    {
+      "id": "trail-vs-spa",
+      "axes": ["activity"],
+      "a": {
+        "label": "dawn trail run",
+        "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=900",
+        "audioPrompt": "Trail at sunrise, cold air, heart pounding.",
+        "weights": { "activity": 0.8 }
+      },
+      "b": {
+        "label": "spa morning",
+        "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900",
+        "audioPrompt": "Steam room, eucalyptus, slow breathing.",
+        "weights": { "activity": -0.8 }
+      }
+    }
+  ]
+}
