@@ -20,7 +20,7 @@ export interface VibePair {
   b: VibeSide;
 }
 
-export type Reaction = 'like' | 'dislike';
+export type Reaction = 'like' | 'dislike' | 'lingered' | 'bounced';
 
 export interface FeedCardRef {
   cardId: string;
@@ -35,7 +35,8 @@ export interface FeedCardRef {
 export interface CardEvent {
   cardId: string;
   reaction: Reaction;
-  at: number; // epoch ms
+  dwellMs: number;
+  at: number;
 }
 
 export interface FeedState {
@@ -52,15 +53,28 @@ export interface BriefRecommendation {
   blurb: string;
 }
 
+export interface ReasoningStep {
+  cardId: string;
+  image: string;
+  label: string;
+  reaction: Reaction;
+  dwellMs: number;
+  interpretation: string;
+}
+
 export interface GuestBrief {
   token: string;
   headline: string;
   oneLine: string;
   liked: Array<{ cardId: string; image: string; label: string }>;
   recommendations: BriefRecommendation[];
+  reasoning: ReasoningStep[];
+  axisScores: Array<{ axis: Axis; score: number; phrase: string }>;
   wrapNote: string;
   signoff: string;
   reactionsCount: number;
+  totalDwellMs: number;
+  confidence: 'high' | 'medium' | 'low';
 }
 
 export function emptyProfile(): ProfileVector {

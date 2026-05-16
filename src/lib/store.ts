@@ -1,10 +1,10 @@
 'use client';
 import { create } from 'zustand';
-import type { FeedState, FeedCardRef, CardEvent } from './types';
+import type { FeedState, FeedCardRef, CardEvent, Reaction } from './types';
 
 interface Actions {
   startSession: (token: string, deck: FeedCardRef[]) => void;
-  recordReaction: (cardId: string, reaction: 'like' | 'dislike') => void;
+  recordEvent: (cardId: string, reaction: Reaction, dwellMs: number) => void;
   advanceCursor: () => void;
   setWrapNote: (note: string) => void;
   complete: () => void;
@@ -27,10 +27,10 @@ export const useFeed = create<Store>((set, get) => ({
 
   startSession: (token, deck) => set({ ...EMPTY, token, deck }),
 
-  recordReaction: (cardId, reaction) => {
+  recordEvent: (cardId, reaction, dwellMs) => {
     const state = get();
     const filtered = state.events.filter(e => e.cardId !== cardId);
-    const event: CardEvent = { cardId, reaction, at: Date.now() };
+    const event: CardEvent = { cardId, reaction, dwellMs, at: Date.now() };
     set({ events: [...filtered, event] });
   },
 

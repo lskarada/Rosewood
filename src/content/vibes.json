@@ -20,15 +20,15 @@
       "id": "winegarden-vs-maderabar",
       "axes": ["evening"],
       "a": {
-        "label": "Wine Garden at sunset",
+        "label": "wine garden at sunset",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/61288ea5-80e5-489e-baaf-2834449bfefb/RWSHR_3-0_Brand-com_Assets_EXTERIOR_SUNSETLAWN_OUTDOOR_SPACE",
         "audioPrompt": "Wine Garden at sunset — jazz, glass of rosé, low light.",
         "weights": { "evening": 0.8 }
       },
       "b": {
-        "label": "Madera bar after dark",
+        "label": "bar after dark",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/cf8f4a51-2cf6-4f77-b2c5-bd989213c71e/RWSHR_3-0_Brand-com_Assets_FACILITIES_MADERABAR",
-        "audioPrompt": "Madera bar — leather chair, scotch, room quiet by midnight.",
+        "audioPrompt": "Madera bar — leather chair, scotch, quiet by midnight.",
         "weights": { "evening": -0.8 }
       }
     },
@@ -36,13 +36,13 @@
       "id": "trail-vs-spa",
       "axes": ["activity"],
       "a": {
-        "label": "Sand Hill trail",
+        "label": "trail at dawn",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/ba761f30-7b6c-4ae9-8826-a65eccedf152/RWSHR_3-0_Brand-com_Assets_Facilities_OutdoorSpace_Weddings",
         "audioPrompt": "Sand Hill trail at dawn — cold air, coffee, oak hills.",
         "weights": { "activity": 0.8 }
       },
       "b": {
-        "label": "Asaya treatment",
+        "label": "spa morning",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/0be73f5e-e67c-423e-af13-3ffbd28461fd/RWSHR_3-0_Brand-com_Assets_FACILITIES_ASAYASPA_TREATMENTROOMS",
         "audioPrompt": "Asaya treatment room — steam, eucalyptus, slow breath.",
         "weights": { "activity": -0.8 }
@@ -52,13 +52,13 @@
       "id": "local-vs-onproperty",
       "axes": ["dining"],
       "a": {
-        "label": "hidden Menlo spot",
-        "image": "https://images.unsplash.com/photo-1676408577323-4dda604089f8?w=900",
-        "audioPrompt": "Hidden Menlo Park spot — three tables, no sign, the regulars.",
+        "label": "hidden neighborhood spot",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
+        "audioPrompt": "Hidden neighborhood spot — three tables, no sign, the regulars.",
         "weights": { "dining": 0.8 }
       },
       "b": {
-        "label": "Madera chef's counter",
+        "label": "chef's counter",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/f4c5b6d7-eb2c-47a4-b953-8ea4a9c8d9e1/RWSHR_3-0_Brand-com_Assets_Facilities_Restaurant_Madera_Setup",
         "audioPrompt": "Madera chef's counter — eight courses, white linen.",
         "weights": { "dining": -0.8 }
@@ -68,13 +68,13 @@
       "id": "minimal-vs-maximal",
       "axes": ["aesthetic"],
       "a": {
-        "label": "Premier King room",
+        "label": "minimal room",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/aa97ecf1-74b8-42fd-b4a9-635c22b31c45/RWSHR_3-0_Brand-com_Assets_Rooms-Accommodations_Premier_King",
         "audioPrompt": "Premier King — quiet palette, vaulted ceiling, clean lines.",
         "weights": { "aesthetic": 0.8 }
       },
       "b": {
-        "label": "Luxury Suite",
+        "label": "layered suite",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/94ed4529-db55-4d0a-94a9-8623ba2dd942/RWSHR_3-0_Brand-com_Assets_Rooms-Accommodations_Luxury_Suite_Living_Room",
         "audioPrompt": "Luxury Suite — fireplace, layered linens, warm wood.",
         "weights": { "aesthetic": -0.8 }
@@ -84,64 +84,48 @@
       "id": "solo-vs-group",
       "axes": ["format"],
       "a": {
-        "label": "private movement studio",
+        "label": "sunrise alone",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/0b0d882c-6bec-4314-8a99-39266548b64e/RWSHR_3-0_Brand-com_Assets_FACILITIES_ASAYASPA_MOVEMENTSTUDIO",
         "audioPrompt": "Sunrise movement studio — mat unrolled, oak hills, just you.",
         "weights": { "format": 0.8 }
       },
       "b": {
-        "label": "Wine Garden tasting",
+        "label": "tasting with strangers",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/3539718d-3ad0-4357-8427-a26eba93558c/RWSHR_3-0_Brand-com_Assets_L1080134",
         "audioPrompt": "Wine Garden tasting — six wines, six new faces.",
         "weights": { "format": -0.8 }
       }
     },
     {
-      "id": "beach-vs-forest",
-      "axes": ["environment"],
-      "a": {
-        "label": "Mayakoba beach",
-        "image": "https://picasso.rosewoodhotelgroup.com/transform/24f83c2a-3967-4f18-b076-3f60e9347b56/RWMYK_Facilities_Pool-and-Beach-Club_Punta-Bonita_hero",
-        "audioPrompt": "Mayakoba beach — white sand, mangrove edge, water lapping.",
-        "weights": { "environment": 0.8 }
-      },
-      "b": {
-        "label": "Castiglion del Bosco",
-        "image": "https://picasso.rosewoodhotelgroup.com/transform/bd8b031f-3298-497a-a89c-a93ff9118b58/RWCDB_3-0_Brand-com_Assets_Destination_Vald-Orcia_View",
-        "audioPrompt": "Castiglion del Bosco — Tuscan hill, vineyards, pine ridges.",
-        "weights": { "environment": -0.8 }
-      }
-    },
-    {
-      "id": "ramen-vs-market",
+      "id": "city-vs-morning",
       "axes": ["chronotype"],
       "a": {
-        "label": "Hong Kong rooftop",
-        "image": "https://picasso.rosewoodhotelgroup.com/transform/e0840f0f-82b1-4ec4-a22a-511ea1f362c1/RWHKG_3-0_Brand-com_Assets_Destination_Cityscape-Night_1",
-        "audioPrompt": "Hong Kong rooftop at midnight — neon below, jazz at DarkSide.",
+        "label": "city after dark",
+        "image": "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1200&q=80",
+        "audioPrompt": "Rooftop at midnight — lights below, drink in hand, no rush.",
         "weights": { "chronotype": 0.8 }
       },
       "b": {
-        "label": "Menlo farmers market",
-        "image": "https://images.unsplash.com/photo-1757609909192-0246239198c0?w=900",
-        "audioPrompt": "Menlo farmers market at 7am — stone fruit, espresso.",
+        "label": "farmers market at 7am",
+        "image": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1200&q=80",
+        "audioPrompt": "Farmers market at 7am — stone fruit, espresso, slow start.",
         "weights": { "chronotype": -0.8 }
       }
     },
     {
-      "id": "neighborhood-vs-resort",
-      "axes": ["social", "environment"],
+      "id": "openlawn-vs-villa",
+      "axes": ["environment"],
       "a": {
-        "label": "Carlyle",
-        "image": "https://picasso.rosewoodhotelgroup.com/transform/6aa66f36-c259-4a5b-831a-5e878c0caa1f/RWCAR_3-0_Brand-com_Assets_Hero_1",
-        "audioPrompt": "Madison Avenue outside The Carlyle — taxis, doormen, motion.",
-        "weights": { "social": 0.4, "environment": 0.4 }
+        "label": "open lawn, big sky",
+        "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80",
+        "audioPrompt": "Open lawn under big sky — wind through grass, room to breathe.",
+        "weights": { "environment": 0.8 }
       },
       "b": {
-        "label": "Sand Hill villa",
+        "label": "private villa under oaks",
         "image": "https://picasso.rosewoodhotelgroup.com/transform/d41745a8-68f9-49ac-9ee1-6c98e0e0af0c/RWSHR_3-0_Brand-com_Assets_VILLAS_ACCOMODATIONS_EXTERIOR_BACKYARD",
         "audioPrompt": "Sand Hill villa — private yard, oak groves, birdsong.",
-        "weights": { "social": -0.4, "environment": -0.4 }
+        "weights": { "environment": -0.8 }
       }
     }
   ]
