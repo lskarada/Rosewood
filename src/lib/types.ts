@@ -60,6 +60,11 @@ export interface GuestBrief {
   confidence: number;
   answeredCount: number;
   maxStreak: number;
+  // Feed-mode extras (optional so audio path still compiles)
+  liked?: Array<{ cardId: string; image: string; label: string }>;
+  bounced?: Array<{ cardId: string; image: string; label: string }>;
+  inTheirWords?: WrapAnswers;
+  engagement?: 'high' | 'medium' | 'quick';
 }
 
 export function emptyProfile(): ProfileVector {
@@ -74,3 +79,49 @@ export const AXIS_GROUPS = {
   pace: ['activity', 'format', 'chronotype'] as Axis[],
   taste: ['dining', 'aesthetic'] as Axis[],
 } as const;
+
+// === Feed-mode types (spec §6) =============================================
+
+export type Reaction = 'like' | 'dislike' | 'lingered' | 'bounced' | 'neutral';
+
+export interface FeedCardRef {
+  cardId: string;        // <pair-id>-<a|b>
+  pairId: string;
+  side: 'a' | 'b';
+  axes: Axis[];
+  weights: Partial<Record<Axis, number>>;
+  image: string;
+  label: string;
+  audioPrompt: string;
+}
+
+export interface CardEvent {
+  cardId: string;
+  reaction: Reaction;
+  dwellMs: number;
+  enteredAt: number;
+}
+
+export interface WrapAnswers {
+  partySize?: string;
+  constraints?: string;
+  perfectTrip?: string;
+}
+
+export interface FeedState {
+  token: string;
+  deck: FeedCardRef[];   // length 10
+  cursor: number;        // 0..deck.length
+  events: CardEvent[];
+  wrap: WrapAnswers;
+  isComplete: boolean;
+}
+
+// Extension of GuestBrief for feed-mode renderBrief (spec §6, §11).
+// New optional fields — keeps the existing brief type backward compatible.
+export interface FeedBriefExtras {
+  liked: Array<{ cardId: string; image: string; label: string }>;
+  bounced: Array<{ cardId: string; image: string; label: string }>;
+  inTheirWords: WrapAnswers;
+  engagement: 'high' | 'medium' | 'quick';
+}
