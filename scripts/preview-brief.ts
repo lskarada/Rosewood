@@ -51,6 +51,14 @@ console.log(line);
 console.log();
 console.log('  ' + brief.greeting.replace(/(.{0,68})\s/g, '$1\n  '));
 console.log();
+if (brief.spine.length > 0) {
+  console.log('  WHAT PULLED THEM');
+  brief.spine.forEach(s => {
+    console.log(`  • ${s.label}  (not the ${s.vs})`);
+    console.log(`      ${s.image.slice(0, 64)}...`);
+  });
+  console.log();
+}
 if (brief.surprise) {
   console.log('  ⚠ ONE TO NOTE');
   console.log('  ' + brief.surprise.replace(/(.{0,68})\s/g, '$1\n  '));

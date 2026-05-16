@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { GuestBrief } from '@/lib/types';
 
 export function BriefCard({ brief }: { brief: GuestBrief }) {
@@ -20,6 +21,36 @@ export function BriefCard({ brief }: { brief: GuestBrief }) {
           {brief.greeting}
         </p>
       </div>
+
+      {/* What pulled them — image spine */}
+      {brief.spine.length > 0 ? (
+        <div className="px-8 pb-6">
+          <div className="text-xs uppercase tracking-wide text-stone-500 mb-3">
+            What pulled them
+          </div>
+          <div className={`grid gap-3 ${brief.spine.length === 1 ? 'grid-cols-1' : brief.spine.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+            {brief.spine.map((s, i) => (
+              <figure key={i} className="space-y-2">
+                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-stone-200">
+                  {s.image ? (
+                    <Image
+                      src={s.image}
+                      alt={s.label}
+                      fill
+                      sizes="(max-width: 768px) 33vw, 200px"
+                      className="object-cover"
+                    />
+                  ) : null}
+                </div>
+                <figcaption className="text-sm">
+                  <div className="font-medium text-stone-900">{s.label}</div>
+                  <div className="text-xs text-stone-500">not the {s.vs}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       {/* Surprise callout (optional) */}
       {brief.surprise ? (

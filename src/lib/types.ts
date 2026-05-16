@@ -52,7 +52,7 @@ export interface GuestBrief {
   headline: string;
   greeting: string;
   surprise?: string;
-  spine: Array<{ label: string; vs: string }>;
+  spine: Array<{ label: string; vs: string; image: string }>;
   recommendations: BriefRecommendation[];
   confidencePhrase: string;
   signoff: string;

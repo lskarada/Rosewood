@@ -111,7 +111,7 @@ describe('renderBrief', () => {
       isComplete: true, confidence: 0.5,
     };
     const brief = renderBrief(state, [pair]);
-    expect(brief.spine).toEqual([{ label: 'hidden cabana', vs: 'busy pool' }]);
+    expect(brief.spine).toEqual([{ label: 'hidden cabana', vs: 'busy pool', image: '' }]);
     expect(brief.greeting).toMatch(/hidden cabana/);
   });
 

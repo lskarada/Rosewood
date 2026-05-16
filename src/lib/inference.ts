@@ -143,9 +143,9 @@ export function renderBrief(state: SurveyState, pool: VibePair[]): GuestBrief {
       const chosen = ans.chose === 'a' ? pair.a : pair.b;
       const rejected = ans.chose === 'a' ? pair.b : pair.a;
       const maxW = Math.max(0, ...Object.values(chosen.weights).map(v => Math.abs(v ?? 0)));
-      return { label: chosen.label, vs: rejected.label, weight: maxW };
+      return { label: chosen.label, vs: rejected.label, image: chosen.image, weight: maxW };
     })
-    .filter((x): x is { label: string; vs: string; weight: number } => x !== null)
+    .filter((x): x is { label: string; vs: string; image: string; weight: number } => x !== null)
     .sort((a, b) => b.weight - a.weight)
     .slice(0, 3);
 
@@ -224,7 +224,7 @@ export function renderBrief(state: SurveyState, pool: VibePair[]): GuestBrief {
     headline: 'Brief from Sky',
     greeting,
     surprise,
-    spine: spineEntries.map(s => ({ label: s.label, vs: s.vs })),
+    spine: spineEntries.map(s => ({ label: s.label, vs: s.vs, image: s.image })),
     recommendations: recs.slice(0, 3),
     confidencePhrase,
     signoff: '— Sky · your AI concierge',
