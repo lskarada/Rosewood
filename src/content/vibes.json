@@ -47,6 +47,102 @@
         "audioPrompt": "Steam room, eucalyptus, slow breathing.",
         "weights": { "activity": -0.8 }
       }
+    },
+    {
+      "id": "local-vs-onproperty",
+      "axes": ["dining"],
+      "a": {
+        "label": "hidden local spot",
+        "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900",
+        "audioPrompt": "An alley restaurant — three tables, no sign, locals only.",
+        "weights": { "dining": 0.8 }
+      },
+      "b": {
+        "label": "chef's table",
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900",
+        "audioPrompt": "Chef's counter at the hotel — eight courses, white linen.",
+        "weights": { "dining": -0.8 }
+      }
+    },
+    {
+      "id": "minimal-vs-maximal",
+      "axes": ["aesthetic"],
+      "a": {
+        "label": "minimal concrete",
+        "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900",
+        "audioPrompt": "A concrete loft — one chair, one window, one plant.",
+        "weights": { "aesthetic": 0.8 }
+      },
+      "b": {
+        "label": "layered maximalist",
+        "image": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900",
+        "audioPrompt": "A layered suite — velvet, brass, ten textures, one room.",
+        "weights": { "aesthetic": -0.8 }
+      }
+    },
+    {
+      "id": "solo-vs-group",
+      "axes": ["format"],
+      "a": {
+        "label": "solo yoga sunrise",
+        "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900",
+        "audioPrompt": "Sunrise, mat on a deck, just you.",
+        "weights": { "format": 0.8 }
+      },
+      "b": {
+        "label": "group cooking class",
+        "image": "https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=900",
+        "audioPrompt": "Eight strangers, one kitchen, laughter.",
+        "weights": { "format": -0.8 }
+      }
+    },
+    {
+      "id": "beach-vs-forest",
+      "axes": ["environment"],
+      "a": {
+        "label": "beachfront",
+        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900",
+        "audioPrompt": "Salt air, white sand, ice rattling in your glass.",
+        "weights": { "environment": 0.8 }
+      },
+      "b": {
+        "label": "forested ridgeline",
+        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900",
+        "audioPrompt": "Tall pines, cold stream, sun through the canopy.",
+        "weights": { "environment": -0.8 }
+      }
+    },
+    {
+      "id": "ramen-vs-market",
+      "axes": ["chronotype"],
+      "a": {
+        "label": "late-night ramen",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900",
+        "audioPrompt": "11pm — steam, broth, neon outside.",
+        "weights": { "chronotype": 0.8 }
+      },
+      "b": {
+        "label": "7am farmer's market",
+        "image": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=900",
+        "audioPrompt": "Sunrise market — coffee, stone fruit, conversation.",
+        "weights": { "chronotype": -0.8 }
+      }
+    },
+    {
+      "id": "neighborhood-vs-resort",
+      "axes": ["social", "environment"],
+      "a": {
+        "label": "walkable neighborhood",
+        "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900",
+        "audioPrompt": "Old streets, cafés, walking everywhere.",
+        "weights": { "social": 0.4, "environment": 0.4 }
+      },
+      "b": {
+        "label": "private resort",
+        "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900",
+        "audioPrompt": "Behind a gate — no traffic, no strangers.",
+        "weights": { "social": -0.4, "environment": -0.4 }
+      }
     }
   ]
 }
