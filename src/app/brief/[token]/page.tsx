@@ -1,13 +1,30 @@
-export default async function Brief({
+'use client';
+import { use } from 'react';
+import Link from 'next/link';
+import { useSurvey } from '@/lib/store';
+import { BriefCard } from '@/components/BriefCard';
+import { renderBrief } from '@/lib/inference';
+
+export default function Brief({
   params,
 }: {
   params: Promise<{ token: string }>;
 }) {
-  const { token } = await params;
+  const { token } = use(params);
+  const state = useSurvey();
+  if (state.token !== token) {
+    return (
+      <main className="min-h-screen bg-stone-50 p-8">
+        <div className="max-w-md mx-auto text-stone-500">
+          No survey state for this token. <Link href="/" className="underline">Start at the beginning</Link>.
+        </div>
+      </main>
+    );
+  }
+  const brief = renderBrief({ ...state, isComplete: true });
   return (
-    <main className="min-h-screen p-8">
-      <h2 className="text-2xl">Guest brief — token {token}</h2>
-      <p className="mt-2 text-stone-500">stub: BriefCard lands here in Phase 2</p>
+    <main className="min-h-screen bg-stone-50 p-4 md:p-8">
+      <BriefCard brief={brief} />
     </main>
   );
 }

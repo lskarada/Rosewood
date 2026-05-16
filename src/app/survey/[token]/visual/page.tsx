@@ -1,16 +1,46 @@
-export default async function VisualFlow({
+'use client';
+import { useEffect, use } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSurvey } from '@/lib/store';
+import { VibePairCard } from '@/components/VibePair';
+import { StreakBadge } from '@/components/StreakBadge';
+import { ProfileSidebar } from '@/components/ProfileSidebar';
+
+export default function VisualFlow({
   params,
 }: {
   params: Promise<{ token: string }>;
 }) {
-  const { token } = await params;
+  const { token } = use(params);
+  const router = useRouter();
+  const { init, currentPair, answer, isComplete, streak, profile, answered } = useSurvey();
+
+  useEffect(() => {
+    init(token, 'visual');
+  }, [init, token]);
+
+  useEffect(() => {
+    if (isComplete) router.push(`/brief/${token}`);
+  }, [isComplete, router, token]);
+
+  const pair = currentPair();
+  if (!pair) return <main className="p-8">loading…</main>;
+
   return (
-    <main className="min-h-screen p-8">
-      <h2 className="text-2xl">Visual flow — token {token}</h2>
-      <p className="mt-2 text-stone-500">stub: VibePair component lands here in Phase 2</p>
-      <a href={`/brief/${token}`} className="mt-6 inline-block underline">
-        skip to brief →
-      </a>
+    <main className="min-h-screen bg-stone-50 p-4 md:p-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-sm text-stone-500">pair {answered.length + 1}</div>
+          <StreakBadge streak={streak} answered={answered.length} />
+        </div>
+        <div className="grid md:grid-cols-[1fr_180px] gap-6">
+          <VibePairCard pair={pair} onChoose={(side) => answer(side)} />
+          <div className="hidden md:block bg-white rounded-xl p-4 border border-stone-200">
+            <div className="text-xs uppercase tracking-wide text-stone-500 mb-3">profile (live)</div>
+            <ProfileSidebar profile={profile} />
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
